@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="me" id="crate_table_persons">
+        <createTable schemaName="liquibase"
+                     tableName="persons">
+            <column name="id" type="INT"/>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="me" id="add_primary_key">
+        <addPrimaryKey columnNames="id"
+                       constraintName="pk_person"
+                       schemaName="liquibase"
+                       tableName="persons"
+                       validate="true"/>
+    </changeSet>
+
+    <changeSet author="me" id="autoincrement_primary_key">
+        <addAutoIncrement columnDataType="int"
+                          columnName="id"
+                          defaultOnNull="false"
+                          generationType="ALWAYS"
+                          incrementBy="1"
+                          schemaName="liquibase"
+                          tableName="persons"/>
+    </changeSet>
+
+    <changeSet author="me" id="add_column_address">
+        <addColumn schemaName="liquibase" tableName="persons">
+            <column name="address" type="varchar(255) NOT NULL"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="me" id="delete_Fidelis">
+        <delete tableName="persons" schemaName="liquibase">
+            <where>name='Fidelis'</where>
+        </delete>
+    </changeSet>
+
+</databaseChangeLog>
